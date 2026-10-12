@@ -14,8 +14,6 @@ Choose the archive that matches your system architecture:
 avatar-app_linux_<arch>_prod_<version>.zip
 ```
 
-> No public release is available yet.
-
 ---
 
 ## 🚀 Installation (Ubuntu / Debian)
@@ -77,9 +75,9 @@ This is different from bundling one exact SDK inside the App package. Check the 
 
 ## 🔗 Compatibility
 
-| Avatar App | Avatar SDK requirement | Installation behavior |
-|---|---|---|
-| — | — | No public release yet |
+| Avatar App | Avatar SDK | Bundled firmware | Installation |
+|---|---|---|---|
+| 1.1.39 | 1.7.4 | 2.0.7 | Release ZIP installer |
 
 This table will be updated with every public App release.
 
