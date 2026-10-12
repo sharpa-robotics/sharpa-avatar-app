@@ -125,7 +125,7 @@ sudo apt remove sharpa-avatar avatar-sdk
 ## Related downloads
 
 - [Sharpa Avatar SDK](https://github.com/sharpa-robotics/sharpa-avatar-sdk)
-- Sharpa Avatar Firmware — published through a separate firmware repository
+- [Sharpa Avatar Firmware](https://github.com/sharpa-robotics/sharpa-avatar-ae01-firmware)
 
 ---
 
