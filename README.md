@@ -1,6 +1,6 @@
 # Sharpa Avatar App
 
-Sharpa Avatar App is the official desktop application for device configuration, monitoring, firmware updates, and routine operations for Sharpa Avatar.
+Sharpa Avatar App is the official desktop application for configuring and monitoring the Sharpa AvatarExo Glove, visualizing its data, and using it to teleoperate Sharpa Wave.
 
 ---
 
