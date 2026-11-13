@@ -52,13 +52,15 @@ Launch **Sharpa Avatar** from the application menu, or run:
 - Use skeleton visualization and data collection features in the same App package.
 - Visualize glove data and use supported Sharpa Wave teleoperation features.
 
-## 🔗 App and SDK versions
+## 🔗 Compatibility
 
-| App | Included SDK |
-|---|---|
-| 1.2.3 | 1.8.1-2 |
+| Avatar App | Included Avatar SDK | Bundled firmware image | Notes |
+|---|---|---|---|
+| 1.2.3 | 1.8.1-2 | 2.0.8 | Current public release |
 
 App users do not need a separate SDK download. An installation without an existing SDK uses the included package. When updating an existing installation, the installer can retrieve the matching SDK version from the configured Sharpa APT repository.
+
+The table identifies the firmware image supplied with the SDK, not a stated minimum device firmware version. Installing the App or SDK does not update the firmware on a connected glove. Use the App's firmware upgrade feature if you need to install a firmware image on the device.
 
 ## 🔄 Update
 
