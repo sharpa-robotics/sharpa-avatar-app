@@ -17,14 +17,6 @@ Linux package names follow this format:
 sharpa-avatar_<version>_amd64.deb
 ```
 
-The product `.deb` bundles the **prod Avatar SDK paired with this release** and
-its complete USB device rules. A machine without an SDK defaults to prod.
-Existing prod/research installations retain their SDK line, and APT installs
-the exact SDK version paired with the application. No separate ZIP or manual
-SDK download is required.
-The `.deb` bundles the Avatar SDK paired with this release and the complete
-USB device rules. No separate ZIP or manual SDK download is required.
-
 ---
 
 ## 🚀 Installation (Ubuntu)
@@ -145,14 +137,6 @@ and run:
 ```bash
 sudo apt install --reinstall ./sharpa-avatar_<version>_amd64.deb
 ```
-
-A package republished with the same version number is not normally offered as
-a newer version by the in-app updater. Use the reinstall command above in
-that case.
-Version 1.2.3 was republished. If 1.2.3 is already installed, the in-app updater will not normally offer the republished
-package as a newer version. Download it again and use the reinstall command
-above. The update behavior of an older App is determined by its own updater;
-the 1.2.3 updater's restart checks apply once that version is installed.
 
 ---
 
