@@ -166,7 +166,7 @@ installed.
 
 ## 📌 Notes
 
-- This application is distributed through Sharpa Robotics' internal software hub.
+- This application is distributed through Sharpa Robotics' software hub.
 - Keep the application and its matched SDK together when updating.
 - Make sure the device is properly connected before use.
 
@@ -178,5 +178,3 @@ For issues or questions, contact the Sharpa Robotics development team.
 Include the application version, SDK version, and relevant logs when reporting
 an installation or connection issue.
 
-For build and packaging instructions, see
-[Linux Debian packaging](docs/develop/linux-deb-packaging.md).
