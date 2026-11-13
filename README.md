@@ -1,180 +1,99 @@
-# Sharpa Avatar
+# Sharpa Avatar App
 
-Sharpa Avatar is the desktop application for device configuration, monitoring,
-firmware updates, and routine operations with Sharpa Avatar devices.
-
----
+Sharpa Avatar App is the desktop application for configuring and monitoring the Sharpa AvatarExo Glove, visualizing its data, and using it to teleoperate Sharpa Wave.
 
 ## 📥 Download
 
-Download the latest `.deb` package from the Sharpa Software Hub:
-
-👉 [Sharpa Avatar downloads](https://software-release-gateway.sharpa.com.cn/oss/latest/sharpa-avatar/linux)
-
-Linux package names follow this format:
+Download the current [amd64 installer](https://github.com/sharpa-robotics/sharpa-avatar-app/releases/download/v1.2.3/sharpa-avatar_1.2.3_amd64.deb) from [App v1.2.3](https://github.com/sharpa-robotics/sharpa-avatar-app/releases/tag/v1.2.3):
 
 ```text
-sharpa-avatar_<version>_amd64.deb
+sharpa-avatar_1.2.3_amd64.deb
 ```
 
----
+The App installer includes `avatar-sdk 1.8.1-2` for a new installation without an existing SDK. You do not need to download the SDK separately.
 
-## 🚀 Installation (Ubuntu)
+## 🚀 Install on Ubuntu or Debian
 
-Open a terminal in the directory containing the downloaded package and run:
+Install the downloaded App package with APT:
 
 ```bash
-sudo apt install ./sharpa-avatar_<version>_amd64.deb
+sudo apt install ./sharpa-avatar_1.2.3_amd64.deb
 ```
 
-Replace `<version>` with the version you downloaded. APT installs any missing
-Ubuntu dependencies automatically; access to an Ubuntu package mirror may be
-required.
+The App installs under `/opt/sharpa-avatar/`. If no SDK is installed, its installer installs the included SDK package under `/opt/avatar-sdk/`. If an SDK is already installed, the installer uses the configured Sharpa APT repository to install the matching version when needed.
 
-If you prefer to use `dpkg`, run:
+The SDK installation runs in the background and may finish after the APT command returns. Check that it completed before using the App:
 
 ```bash
-sudo dpkg -i sharpa-avatar_<version>_amd64.deb
-sudo apt-get install -f
+cat /var/lib/sharpa-avatar/sdk-install.success
 ```
 
-During a fresh installation, the matched SDK is set up automatically in the
-background after the application package is installed. You can open the app while this is in
-progress; the backend starts automatically when the SDK is ready.
+If installation is still in progress, `/var/lib/sharpa-avatar/sdk-install.pending` will be present. If it fails, check:
 
----
+```bash
+cat /var/lib/sharpa-avatar/sdk-install.failed
+cat /var/log/sharpa-avatar-bundled-sdk.log
+```
+
+Reconnect the glove after installation if it is not detected.
 
 ## ▶️ Run
 
-After installation, launch the application with:
+Launch **Sharpa Avatar** from the application menu, or run:
 
 ```bash
-sharpa-avatar
+/opt/sharpa-avatar/sharpa-avatar
 ```
 
-Or find **Sharpa Avatar** in your application menu.
+## 📦 Features
 
-Connect your device before using the application. If it is not accessible after
-the first installation, unplug and reconnect it, then check again.
+- Monitor live glove data in the Dashboard.
+- View left and right IMU metrics in curves and data tables, and select them in the chart editor.
+- Use skeleton visualization and data collection features in the same App package.
+- Visualize glove data and use supported Sharpa Wave teleoperation features.
 
----
+## 🔗 App and SDK versions
 
-## 📦 SDK (Linux)
+| App | Included SDK |
+|---|---|
+| 1.2.3 | 1.8.1-2 |
 
-Sharpa Avatar ships with a **matched Avatar SDK** and manages its installation
-automatically.
-
-### Keep the application and SDK matched
-
-- Upgrade or reinstall `sharpa-avatar` to install the SDK paired with that
-  application release.
-- Avoid installing, upgrading, or replacing `avatar-sdk` independently when
-  using the desktop application.
-- Do not replace SDK binaries or libraries under `/opt/avatar-sdk/` or alter
-  the application's bundled SDK files under `/opt/sharpa-avatar/`.
-- Use the application's settings for supported configuration changes.
-
-For product releases, the installer reads `/opt/avatar-sdk/share/avatar-product.txt`
-to preserve prod (`avatar-sdk`) or research (`avatar-sdk-research`). No SDK means
-prod by default. Existing installations are updated through the configured APT
-repository to the exact SDK version paired with the App.
-The installer sets up the SDK version paired with the application. Existing
-installations may require access to the configured APT repository.
-
-The installer also checks and restores the complete USB device rules from the
-selected SDK, even when that SDK version is already installed.
-
-### Where files live (reference)
-
-| Item                 | Path                                             |
-| -------------------- | ------------------------------------------------ |
-| Avatar application   | `/opt/sharpa-avatar/`                            |
-| Installed Avatar SDK | `/opt/avatar-sdk/`                               |
-| Backend binary       | `/opt/avatar-sdk/bin/avatar-backend`             |
-| USB device rules     | `/etc/udev/rules.d/70-sharpa-avatar-glove.rules` |
-| SDK installer log    | `/var/log/sharpa-avatar-bundled-sdk.log`         |
-| Application logs     | `~/.sharpa-avatar/logs/`                         |
-
-### Installation status and recovery
-
-SDK installation status is recorded under `/var/lib/sharpa-avatar/`:
-
-- `sdk-install.pending`: installation or retry is pending.
-- `sdk-install.success`: SDK installation and device-rule setup completed.
-- `sdk-install.failed`: an installation attempt failed; check the installer log.
-
-On systems using systemd, retry a failed installation with:
-
-```bash
-sudo systemctl restart sharpa-avatar-bundled-sdk.service
-```
-
-Keep the app open while the installer retries; the backend starts when the
-installation completes successfully.
-
----
+App users do not need a separate SDK download. An installation without an existing SDK uses the included package. When updating an existing installation, the installer can retrieve the matching SDK version from the configured Sharpa APT repository.
 
 ## 🔄 Update
 
-Product OTA runs `apt update` and installs the App with the exact matching SDK
-from the existing prod/research line. The App restarts only after both packages
-and the USB rules have been checked successfully. An APT or SDK failure stops
-the update instead of switching SDK lines or using the bundled prod SDK as a
-fallback.
-The 1.2.3 updater installs the application and its matching SDK. The app
-restarts only after both packages and the USB rules have been checked
-successfully. An APT or SDK failure stops the update.
+Download the newer App `.deb` from [Releases](https://github.com/sharpa-robotics/sharpa-avatar-app/releases), then run `sudo apt install` with the path to that file.
 
-To update manually, download the newer `.deb` package and install it with:
+The upgrade configures the Sharpa APT repository and installs the matching SDK version in the background. Network access to that repository is required when the SDK needs updating. Check `/var/lib/sharpa-avatar/sdk-install.success` to confirm that SDK installation finished.
 
-```bash
-sudo apt install ./sharpa-avatar_<new-version>_amd64.deb
-```
-
-To reinstall the same application version, download the intended package again
-and run:
-
-```bash
-sudo apt install --reinstall ./sharpa-avatar_<version>_amd64.deb
-```
-
----
+The App remains under `/opt/sharpa-avatar/`. Package upgrades retain the desktop shortcut and user configuration.
 
 ## ❌ Uninstall
 
-To remove the application:
+Remove the App:
 
 ```bash
 sudo apt remove sharpa-avatar
 ```
 
-Removing the application also removes its bundled-SDK installation service.
-The separately installed `avatar-sdk` package and system USB device rules
-remain installed.
-The separately installed SDK package and system USB device rules remain
-installed.
+The SDK is a separate Debian package and is not removed automatically with the App. To remove it as well:
 
----
+```bash
+sudo apt remove avatar-sdk
+```
 
 ## ⚠️ Requirements
 
-- Ubuntu 22.04, validated for this Linux release
-- x86_64 / amd64 architecture
-- Administrator privileges for installation and updates
+- Ubuntu or Debian-based Linux on amd64 for the current App package.
+- Administrator privileges to install packages and configure device access.
+- Network access to the Sharpa APT repository when upgrading the SDK with the App.
+- A supported Sharpa AvatarExo Glove.
 
----
+## 🔗 Related downloads
 
-## 📌 Notes
-
-- This application is distributed through Sharpa Robotics' software hub.
-- Keep the application and its matched SDK together when updating.
-- Make sure the device is properly connected before use.
-
----
+- [Sharpa Avatar SDK](https://github.com/sharpa-robotics/sharpa-avatar-sdk)
+- [Sharpa Avatar Firmware](https://github.com/sharpa-robotics/sharpa-avatar-ae01-firmware)
 
 ## 📞 Support
 
-For issues or questions, contact the Sharpa Robotics development team.
-Include the application version, SDK version, and relevant logs when reporting
-an installation or connection issue.
-
+For product support, contact [support@sharpa.com](mailto:support@sharpa.com).
