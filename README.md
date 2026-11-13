@@ -9,7 +9,7 @@ firmware updates, and routine operations with Sharpa Avatar devices.
 
 Download the latest `.deb` package from the Sharpa Software Hub:
 
-👉 [Sharpa Avatar downloads](https://soft.sharpa.com/app/detail?code=sharpa-avatar)
+👉 [Sharpa Avatar downloads](https://software-release-gateway.sharpa.com.cn/oss/latest/sharpa-avatar/linux)
 
 Linux package names follow this format:
 
